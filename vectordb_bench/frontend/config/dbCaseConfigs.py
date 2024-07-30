@@ -221,7 +221,7 @@ CaseConfigParamInput_m = CaseConfigInput(
     inputConfig={
         "min": 4,
         "max": 64,
-        "value": 16,
+        "value": 30,
     },
     isDisplayed=lambda config: config.get(CaseConfigParamType.IndexType, None)
     == IndexType.HNSW.value,
@@ -314,7 +314,7 @@ CaseConfigParamInput_EFConstruction_PgVector = CaseConfigInput(
     inputConfig={
         "min": 8,
         "max": 1024,
-        "value": 256,
+        "value": 300,
     },
     isDisplayed=lambda config: config[CaseConfigParamType.IndexType]
     == IndexType.HNSW.value,
@@ -617,7 +617,7 @@ CaseConfigParamInput_EFSearch_PgVector = CaseConfigInput(
     inputConfig={
         "min": 1,
         "max": 2048,
-        "value": 256,
+        "value": 100,
     },
     isDisplayed=lambda config: config.get(CaseConfigParamType.IndexType, None)
     == IndexType.HNSW.value,

@@ -47,9 +47,7 @@ class PgVector(VectorDB):
         # construct basic units
         self.conn, self.cursor = self._create_connection(**self.db_config)
 
-        # create vector extension
-        self.cursor.execute("CREATE EXTENSION IF NOT EXISTS vector")
-        self.conn.commit()
+        
 
         log.info(f"{self.name} config values: {self.db_config}\n{self.case_config}")
         if not any(
@@ -79,7 +77,13 @@ class PgVector(VectorDB):
     @staticmethod
     def _create_connection(**kwargs) -> Tuple[Connection, Cursor]:
         conn = psycopg.connect(**kwargs)
+        
+        # create vector extension
+        conn.execute("CREATE EXTENSION IF NOT EXISTS vector")
+        conn.execute("SET vectors.pgvector_compatibility = off")
+        conn.commit()
         register_vector(conn)
+
         conn.autocommit = False
         cursor = conn.cursor()
 
